@@ -1,0 +1,14 @@
+[Unit]
+Description=Janus Gateway service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+Environment=LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/local/lib/arm-linux-gnueabihf
+ExecStart=/opt/janus/bin/janus
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

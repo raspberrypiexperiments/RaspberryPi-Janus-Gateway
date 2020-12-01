@@ -1,0 +1,24 @@
+--- a/janus-gateway/conf/janus.transport.http.jcfg.sample	2020-11-21 12:18:23.718000000 +0100
++++ b/janus-gateway/conf/janus.transport.http.jcfg.sample	2020-11-21 12:15:28.046538499 +0100
+@@ -14,8 +14,8 @@
+ 	port = 8088						# Web server HTTP port
+ 	#interface = "eth0"				# Whether we should bind this server to a specific interface only
+ 	#ip = "192.168.0.1"				# Whether we should bind this server to a specific IP address (v4 or v6) only
+-	https = false					# Whether to enable HTTPS (default=false)
+-	#secure_port = 8089				# Web server HTTPS port, if enabled
++	https = true					# Whether to enable HTTPS (default=false)
++	secure_port = 8089				# Web server HTTPS port, if enabled
+ 	#secure_interface = "eth0"		# Whether we should bind this server to a specific interface only
+ 	#secure_ip = "192.168.0.1"		# Whether we should bind this server to a specific IP address (v4 or v6) only
+ 	#acl = "127.,192.168.0."		# Only allow requests coming from this comma separated list of addresses
+@@ -64,8 +64,8 @@
+ # You can also disable insecure protocols and ciphers by configuring the
+ # 'ciphers' property accordingly (no limitation by default).
+ certificates: {
+-	#cert_pem = "/path/to/cert.pem"
+-	#cert_key = "/path/to/key.pem"
++	cert_pem = "/opt/janus/etc/janus/cert.pem"
++	cert_key = "/opt/janus/etc/janus/key.pem"
+ 	#cert_pwd = "secretpassphrase"
+ 	#ciphers = "PFS:-VERS-TLS1.0:-VERS-TLS1.1:-3DES-CBC:-ARCFOUR-128"
+ }
