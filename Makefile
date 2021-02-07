@@ -1,3 +1,25 @@
+# MIT License
+#
+# Copyright (c) 2021 Marcin Sielski <marcin.sielski@gmail.com>
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 NUM_PROCESSORS = `grep -c ^processor /proc/cpuinfo`
 
 dependecies:
@@ -8,7 +30,7 @@ dependecies:
 	cd janus-gateway && git checkout v0.10.8
 
 install: dependecies	
-	patch -p1 < 0001_janus.transport.http.jcfg.sample.patch
+	if ! patch -R -p1 -s -f --dry-run <0001_janus.transport.http.jcfg.sample.patch; then patch -p1 < 0001_janus.transport.http.jcfg.sample.patch; fi
 	cd janus-gateway && sh autogen.sh && ./configure --prefix=/opt/janus && make -j$(NUM_PROCESSORS) && sudo make install && sudo make configs
 	sudo openssl req -x509 -newkey rsa:4096 -config cert.cfg -keyout /opt/janus/etc/janus/key.pem -out /opt/janus/etc/janus/cert.pem -days 365 -nodes
 	sudo chown $$USER:$$USER /opt/janus/etc/janus/key.pem
