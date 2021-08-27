@@ -30,6 +30,7 @@ dependecies:
 	cd janus-gateway && git checkout v0.10.8
 
 install: dependecies	
+	cd usrsctp && ./bootstrap && ./configure --prefix=/usr/local --disable-programs --disable-inet --disable-inet6 && make -j$(NUM_PROCESSORS) && sudo make install
 	if ! patch -R -p1 -s -f --dry-run <0001_janus.transport.http.jcfg.sample.patch; then patch -p1 < 0001_janus.transport.http.jcfg.sample.patch; fi
 	cd janus-gateway && sh autogen.sh && ./configure --prefix=/opt/janus && make -j$(NUM_PROCESSORS) && sudo make install && sudo make configs
 	sudo openssl req -x509 -newkey rsa:4096 -config cert.cfg -keyout /opt/janus/etc/janus/key.pem -out /opt/janus/etc/janus/cert.pem -days 365 -nodes
@@ -46,5 +47,6 @@ uninstall: dependecies
 	sudo systemctl stop janus.service
 	sudo systemctl disable janus.service || true
 	sudo rm -rf /etc/systemd/system/janus.service
-	patch -p1 < 0001_janus.transport.http.jcfg.sample.patch
+	patch -p1 -R < 0001_janus.transport.http.jcfg.sample.patch
 	cd janus-gateway && sh autogen.sh && ./configure --prefix=/opt/janus && sudo make uninstall
+	cd usrsctp && ./bootstrap && ./configure --prefix=/usr/local --disable-programs --disable-inet --disable-inet6 && sudo make uninstall
