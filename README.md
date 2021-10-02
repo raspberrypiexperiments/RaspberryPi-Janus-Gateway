@@ -5,6 +5,8 @@ steps to enable Echo Test and Streaming plugins over HTTPS protocol on Raspberry
 
 ## Known supported Raspberry Pi
 
+* Raspberry Pi Zero,
+* Raspberry Pi Zero W,
 * Raspberry Pi 3B,
 * Raspberry Pi 4B.
 
@@ -13,9 +15,9 @@ steps to enable Echo Test and Streaming plugins over HTTPS protocol on Raspberry
 To install Janus Gateway run:
 
 ```bash
-~ $ git clone --recurse-submodules -j4 https://github.com/raspberrypiexperiments/RaspberryPi-Janus-Gateway.git
-~ $ cd RaspberryPi-Janus-Gateway
-RaspberryPi-Janus-Gateway/~ $ make install 
+git clone --recurse-submodules -j$(nproc) https://github.com/raspberrypiexperiments/RaspberryPi-Janus-Gateway.git
+cd RaspberryPi-Janus-Gateway
+make install 
 ```
 
 ## Uninstallation
@@ -23,9 +25,9 @@ RaspberryPi-Janus-Gateway/~ $ make install
 To uninstall Janus Gateway run:
 
 ```bash
-RaspberryPi-Janus-Gateway/~ $ make uninstall
-RaspberryPi-Janus-Gateway/~ $ cd ..
-~ $ rm -rf RaspberryPi-Janus-Gateway
+make uninstall
+cd ..
+sudo rm -rf RaspberryPi-Janus-Gateway
 ```
 
 ## License
