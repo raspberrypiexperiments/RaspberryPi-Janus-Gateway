@@ -16,7 +16,11 @@ To install Janus Gateway run:
 
 ```bash
 git clone --recurse-submodules -j$(nproc) https://github.com/raspberrypiexperiments/RaspberryPi-Janus-Gateway.git
+```
+```bash
 cd RaspberryPi-Janus-Gateway
+```
+```bash
 make install 
 ```
 
@@ -26,7 +30,11 @@ To uninstall Janus Gateway run:
 
 ```bash
 make uninstall
+```
+```bash
 cd ..
+```
+```bash
 sudo rm -rf RaspberryPi-Janus-Gateway
 ```
 
@@ -34,4 +42,4 @@ sudo rm -rf RaspberryPi-Janus-Gateway
 
 MIT License
 
-Copyright (c) 2021 Marcin Sielski <marcin.sielski@gmail.com>
+Copyright (c) 2021-2022 Marcin Sielski <marcin.sielski@gmail.com>
